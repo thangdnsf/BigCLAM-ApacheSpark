@@ -1,0 +1,34 @@
+\nomenclatureentry{KNBigCLAM@[{BigCLAM}]\begingroup Cluster Affiliation Model for Big Networks\nomeqref {0}|nompageref}{iii}
+\nomenclatureentry{KNSNAP@[{SNAP}]\begingroup Stanford Network Analysis Project\nomeqref {0}|nompageref}{iii}
+\nomenclatureentry{KH$\mathcal{V}$@[{$\mathcal{V}$}]\begingroup Tập đỉnh\nomeqref {1.0}|nompageref}{3}
+\nomenclatureentry{KH$\mathcal{E}$@[{$\mathcal{E}$}]\begingroup Tập cạnh\nomeqref {1.0}|nompageref}{3}
+\nomenclatureentry{KH$G(\mathcal{V},\mathcal{E})$@[{$G(\mathcal{V},\mathcal{E})$}]\begingroup Đồ thị có $\mathcal{V}$ đỉnh và $\mathcal{E}$ cạnh\nomeqref {1.0}|nompageref}{3}
+\nomenclatureentry{KH$\mathcal{K}$@[{$\mathcal{K}$}]\begingroup Số cộng đồng\nomeqref {1.0}|nompageref}{3}
+\nomenclatureentry{KH$\mathcal{K}$@[{$\mathcal{K}$}]\begingroup Số cộng đồng\nomeqref {1.0}|nompageref}{3}
+\nomenclatureentry{KH$\mathcal{C}$@[{$\mathcal{C}$}]\begingroup Tập cộng đồng\nomeqref {1.0}|nompageref}{3}
+\nomenclatureentry{KNCONGA@[{CONGA}]\begingroup Cluster Overlap Newman Girvan Algorithm\nomeqref {1.0}|nompageref}{6}
+\nomenclatureentry{KNAGM@[{AGM}]\begingroup Affiliation graph model\nomeqref {1.0}|nompageref}{7}
+\nomenclatureentry{KH$M$@[{$M$}]\begingroup Cạnh liên hết các đỉnh với các cộng đồng\nomeqref {1.0}|nompageref}{7}
+\nomenclatureentry{KH$B(\mathcal{V},\mathcal{C},M)$@[{$B(\mathcal{V},\mathcal{C},M)$}]\begingroup Đồ thị hai phần thể hiện mô hình AGM\nomeqref {1.0}|nompageref}{7}
+\nomenclatureentry{KH$p_A$@[{$p_A$}]\begingroup Xác suất của một cộng đồng\nomeqref {1.0}|nompageref}{7}
+\nomenclatureentry{KNNMF@[{NMF}]\begingroup Non-negative Matrix Factorization\nomeqref {1.1}|nompageref}{7}
+\nomenclatureentry{KH$A$@[{$A$}]\begingroup Matrix kề của đồ thị $G(\mathcal{V},\mathcal{E})$ \nomeqref {2.0}|nompageref}{9}
+\nomenclatureentry{KH$\varphi(\mathcal{S})$@[{$\varphi(\mathcal{S})$}]\begingroup Độ dẫn của một đồ thị con $\mathcal{S}$\nomeqref {2.1}|nompageref}{10}
+\nomenclatureentry{KH$\mathcal{A}(\mathcal{S})$@[{$\mathcal{A}(\mathcal{S})$}]\begingroup Tổng số bậc bên trong mỗi đồ thị con $\matchal{S}$\nomeqref {2.1}|nompageref}{10}
+\nomenclatureentry{KH$\mathcal{N}(u)$@[{$\mathcal{N}(u)$}]\begingroup Đỉnh lân cận của đỉnh $u$\nomeqref {2.2}|nompageref}{10}
+\nomenclatureentry{KH$N(u)$@[{$N(u)$}]\begingroup Vùng lân cận của đỉnh $u$\nomeqref {2.2}|nompageref}{10}
+\nomenclatureentry{KNMLE@[{MLE}]\begingroup Maximum-Likelihood Estimation\nomeqref {2.2}|nompageref}{11}
+\nomenclatureentry{KH$L(.)$@[{$L(.)$}]\begingroup Hàm khả dĩ\nomeqref {2.2}|nompageref}{11}
+\nomenclatureentry{KH$l(.)$@[{$l(.)$}]\begingroup Logarit tự nhiên của hàm khả dĩ\nomeqref {2.2}|nompageref}{11}
+\nomenclatureentry{KH$domf$@[{$domf$}]\begingroup Tập xác định của hàm số $f(.)$\nomeqref {2.6}|nompageref}{11}
+\nomenclatureentry{KNGD@[{GD}]\begingroup Gradient descent\nomeqref {2.7}|nompageref}{13}
+\nomenclatureentry{KH$J(\theta)$@[{$J(\theta)$}]\begingroup Hàm chi phí\nomeqref {2.7}|nompageref}{13}
+\nomenclatureentry{KH$\nabla_\theta f\left( \theta\right)$@[{$\nabla_\theta f\left( \theta\right)$}]\begingroup Đạo hàm của hàm số $f\left( \theta\right)$ theo $\theta$\nomeqref {2.7}|nompageref}{13}
+\nomenclatureentry{KH$\alpha$@[{$\alpha$}]\begingroup Tham số tốc huấn luyện\nomeqref {2.7}|nompageref}{13}
+\nomenclatureentry{KN$SGD$@[{$SGD$}]\begingroup Stochastic Gradient descent\nomeqref {2.7}|nompageref}{14}
+\nomenclatureentry{KN$MBSGD$@[{$MBSGD$}]\begingroup Mini-batch Stochastic Gradient descent\nomeqref {2.7}|nompageref}{14}
+\nomenclatureentry{KH$F$@[{$F$}]\begingroup Matrix trọng số kết nối cộng đồng\nomeqref {3.0}|nompageref}{16}
+\nomenclatureentry{KH$F_u$@[{$F_u$}]\begingroup Vector trọng số kết nối cộng đồng\nomeqref {3.0}|nompageref}{16}
+\nomenclatureentry{KH$p(u,v)$@[{$p(u,v)$}]\begingroup Xác suất tạo ra cạnh $(u,v) \in \mathcal{E}$\nomeqref {3.0}|nompageref}{16}
+\nomenclatureentry{KNGFS@[{GFS}]\begingroup Google File System\nomeqref {4.0}|nompageref}{23}
+\nomenclatureentry{KNHDFS@[{HDFS}]\begingroup Hadoop Distributed File System\nomeqref {4.0}|nompageref}{23}

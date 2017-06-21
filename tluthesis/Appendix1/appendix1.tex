@@ -1,0 +1,247 @@
+\chapter{Phụ lục A:\\ Cài đặt và triển khai ứng dụng trên Apache Hadoop \& Spark}
+
+Tại chương \ref{chap:c4} triển khai phương pháp phát hiện cộng đồng được trình bày ở chương \ref{chap:c3} trên hai framework Apache Hadoop và Apache Spark. Trong chương này, tôi sẽ trình bày các cài đặt và triển khai ứng dụng trên hai framework này.
+
+\section{Cài đặt}
+Apache Hadoop và Spark được phát triển trên nền tảng GNU/Linux và hoạt động tốt trên môi trường này. Vì vậy, chúng ta nên sử dụng hệ điều hành Linux để cài đặt hai framework này. Giả sử ta sẽ cài đặt hai framework trên một cụm máy gồm $3$ node (worker) và $1$ node (master).
+
+Đầu tiên, ta cần xác định địa chỉ mạng và thiết đặt địa chỉ tĩnh trên mỗi máy trong cụm. Điều này nhằm cố định địa chỉ mạng trên mỗi máy tính. Ví dụ như sau:
+\begin{table}[H]
+	\centering
+	\caption{Các địa chỉ IP trong cụm}
+	\label{ipaddress}
+	\begin{tabular}{@{}cll@{}}
+		\toprule
+		\multicolumn{1}{l}{\textbf{STT}} & \multicolumn{1}{l}{\textbf{Địa chỉ IP}} & \multicolumn{1}{l}{\textbf{Vai trò}} \\ \midrule
+		$1$                                & $192.168.100.10$                  & master                               \\
+		$2$                                & $192.168.100.11$                  & worker1                              \\
+		$3$                               & $192.168.100.12$                  & worker2                              \\
+		$4$                                & $192.168.100.13$                  & worker3                              \\ \bottomrule
+	\end{tabular}
+\end{table}
+
+Bước tiếp theo, ta tiến hành cập nhật file hots (\textit{/etc/hosts}) theo bảng \ref{ipaddress} trên mỗi máy tính. Mục đích là để $4$ node này nó thấy nhau qua tên máy hoặc IP.
+
+Để xác thực giữa các máy trong cụm với nhau nhằm tạo một cơ chế bảo mật và không yêu cầu mật khẩu qua mỗi lần khởi chạy, ta sẽ sử dụng thông qua cơ chế SSH. Để cài đặt SSH ta dùng lệnh:
+\begin{quote}
+	\textbf{\textit{\$ sudo apt-get install openssh-server openssh-client}}
+\end{quote}
+Sau đó tiến hành sinh khóa $RSA$ và sao chép khóa publickey cho các máy \textit{worker} (thực hiện trên máy \textit{master}):\\
+\begin{quote}
+	\textbf{\textit{\$ ssh-keygen\\
+	\$ cd $\sim$/.ssh\\
+	\$ ssh-copy-id -i id\_rsa.pub sv@worker1\\
+	\$ ssh-copy-id -i id\_rsa.pub sv@worker2\\
+	\$ ssh-copy-id -i id\_rsa.pub sv@worker3\\
+	\$ cat id\_rsa.pub $\gg$ authorized\_keys}}
+\end{quote}
+
+Sửa tên máy cho đúng với \textit{master} và từng \textit{worker}, chạy lệnh:
+\begin{quote}
+	\textbf{\textit{\$ hostnamectl set-hostname master\\
+			\$ hostnamectl set-hostname worker1 \\
+			\$ hostnamectl set-hostname worker2 \\
+			\$ hostnamectl set-hostname worker3}}
+\end{quote}
+\subsection{Apache Hadoop \& Spark}
+Tiến hành tải và cài đặt các gói cài đặt Java, Scala, Apache Hadoop, Apache Spark (Chú ý chọn các phiên bản java, scala hỗ trợ hadoop và spark).
+e\begin{itemize}
+	\item \textbf{Scala:} http://www.scala-lang.org/download/
+	\item \textbf{Java:} https://www.java.com/en/download/
+	\item \textbf{Apache Hadoop:} http://hadoop.apache.org/releases.html
+	\item \textbf{Apache Spark:} http://spark.apache.org/downloads.html
+\end{itemize}
+
+Tại thời điểm thực hiện đề tài, tôi sử dụng các phiên bản sau:
+\begin{table}[H]
+	\centering
+	\caption{Các phiên bản cài đặt}
+	\label{versionlist}
+	\begin{tabular}{@{}cll@{}}
+		\toprule
+		\multicolumn{1}{l}{STT} & Gói cài đặt   & Phiên bản                     \\ \midrule
+		$1$                     & Scala         & scala-2.12.1.tgz              \\
+		$2$                     & Java          & jdk-8u121-linux-x64.tar.gz    \\
+		$3$                     & Apache Hadoop & hadoop-2.7.2.tar.gz           \\
+		$4$                     & Apache Spark  & spark-2.1.0-bin-hadoop2.7.tgz \\ \bottomrule
+	\end{tabular}
+\end{table}
+
+Tiến hành giải nén và chuyển vào mục cài đặt các gói cài đặt:
+\begin{quote}
+	\textbf{\textit{// Giải nén gói cài đặt \\
+	\$ tar -xvf jdk-8u121-linux-x64.tar.gz \\
+	\$ tar -xvf hadoop-2.7.2.tar.gz \\
+	\$ tar -xvf spark-2.1.0-bin-hadoop2.7.tgz \\
+	\$ tar -xvf scala-2.12.1.tgz \\
+	// Tạo thư mục cài đặt \\
+	\$ sudo mkdir /usr/local/java \\
+	\$ sudo mkdir /usr/local/hadoop \\
+	\$ sudo mkdir /usr/local/spark \\
+	\$ sudo mkdir /usr/local/scala \\
+	// Chuyển file cài đặt vào thư mục cài đặt \\
+	\$ sudo mv jdk1.8.0\_121 /usr/local/java/jdk1.8.0\_121  \\
+	\$ sudo mv hadoop-2.7.2 /usr/local/hadoop/2.7.2 \\
+	\$ sudo mv spark-2.1.0-bin-hadoop2.7 \\ /usr/local/spark/2.1.0 \\
+	\$ sudo mv scala-2.12.1 /usr/local/scala/scala-2.12.1  \\}}
+\end{quote}
+
+Sau đó ta tiến hành thiết lập (\textit{nano $\sim$/.bashrc}) và cập nhật môi trường(\textit{source $\sim$/.bashrc}) như sau:
+\begin{quote}
+	export JAVA\_HOME=/usr/local/java/jdk1.8.0\_121\\
+	export JRE\_HOME=\$JAVA\_HOME/jre\\
+	export SCALA\_HOME=/usr/local/src/scala/scala-2.12.1\\
+	export SPARK\_HOME=/usr/local/spark/2.1.0\\
+	export HADOOP\_HOME=/usr/local/hadoop/2.7.2\\	export PATH=\$PATH:\$JAVA\_HOME/bin:\$JRE\_HOME/bin:\$SCALA\_HOME/bin:\\
+	\$SPARK\_HOME/bin:\$SPARK\_HOME/sbin:\\
+	\$HADOOP\_HOME/bin:\$HADOOP\_HOME/sbin
+\end{quote}
+\subsection{Cấu hình Hadoop}
+Cấu hình danh sách các máy làm \textit{master}:
+\begin{quote}
+	\textbf{\textit{\$ nano \$HADOOP\_HOME/etc/hadoop/masters}}
+\end{quote}
+
+Cấu hình danh sách các máy làm \textit{worker}:
+\begin{quote}
+	\textbf{\textit{\$ nano \$HADOOP\_HOME/etc/hadoop/slaves}}
+\end{quote}
+
+Khởi tạo namenode cho máy master
+\begin{quote}
+	\textbf{\textit{\$ mkdir -p
+	\$ \$HADOOP\_HOME/hadoop\_store/hdfs/namenode}}
+\end{quote}
+Khởi tạo datanode cho máy worker
+\begin{quote}
+	\textbf{\textit{\$ mkdir -p \$HADOOP\_HOME/hadoop\_store/hdfs/datanode\\
+	\$ chmod 755 \$HADOOP\_HOME/hadoop\_store/hdfs/datanode}}
+\end{quote}
+Cấu hình core-site.xml:
+\begin{quote}
+	<property>\\
+		<name>fs.defaultFS</name>\\
+		<value>hdfs://master:8020</value>\\
+	</property>
+\end{quote}
+Cấu hình hdfs-site.xml:
+\begin{quote}
+	<property>\\
+	<name>dfs.namenode.name.dir</name>\\
+	<value>file:/usr/local/hadoop/2.7.2/hadoop\_store/hdfs/namenode</value>\\
+	</property>\\
+	<property>\\
+	<name>dfs.datanode.data.dir</name>\\
+	<value>file:/usr/local/hadoop/2.7.2/hadoop\_store/hdfs/datanode</value>\\
+	</property>\\
+	<property>\\
+	<name>dfs.replication</name>\\
+	<value>3</value>\\
+	</property>\\
+\end{quote}
+Cấu hình mapred-site.xml:
+\begin{quote}
+	<property>\\
+	<name>mapreduce.framework.name</name>\\
+	<value>yarn</value>\\
+	</property>
+\end{quote}
+Cấu hình yarn-site.xml:
+\begin{quote}
+	<property>\\
+	<name>yarn.resourcemanager.resource-tracker.address</name>\\
+	<value>master:8025</value>\\
+	</property>\\
+	<property>\\
+	<name>yarn.resourcemanager.scheduler.address</name>\\
+	<value>master:8030</value>\\
+	</property>\\
+	<property>\\
+	<name>yarn.resourcemanager.address</name>\\
+	<value>master:8050</value>\\
+	</property>\\
+	<property>\\
+	<name>yarn.nodemanager.aux-services</name>\\
+	<value>mapreduce\_shuffle</value>\\
+	</property>\\
+	<property>\\
+	<name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>\\
+	<value>org.apache.hadoop.mapred.ShuffleHandler</value>\\
+	</property>\\
+	<property>\\
+	<name>yarn.nodemanager.disk-health-checker.min-healthy-disks</name>\\
+	<value>0</value>\\
+	</property>
+	
+\end{quote}
+
+Tiến hành định dạng HDFS:
+\begin{quote}
+	\textbf{\textit{\$ \$HADOOP\_HOME/bin/hdfs namenode -format}}
+\end{quote}
+
+\subsection{Cấu hình Spark}
+Cấu hình danh sách các máy làm \textit{worker}:
+\begin{quote}
+	\textbf{\textit{\$ nano \$SPARK\_HOME/conf/slaves}}
+\end{quote}
+Cấu hình spark-env.sh:
+\begin{quote}
+	SPARK\_WORKER\_MEMORY=1g\\
+	SPARK\_WORKER\_INSTANCES=1\\
+	SPARK\_WORKER\_CORES=2\\
+	SPARK\_MASTER\_HOST=master\\
+	HADOOP\_CONF\_DIR=/usr/local/hadoop/2.7.2/etc/hadoop
+\end{quote}
+Cấu hình spark-defaults.sh:
+\begin{quote}
+	spark.master                     spark://192.168.100.10:7077
+\end{quote}
+
+\section{Tập lệnh}
+\subsection{Danh sách tập lệnh làm việc trên Hadoop}
+\begin{table}[H]
+	\centering
+	\caption{Danh sách tập lệnh cơ bản làm việc trên Hadoop}
+	\label{my-hadoop}
+	\begin{tabular}{@{}lll@{}}
+		\toprule
+		STT                     & Lệnh                                                & Ý nghĩa                             \\ \midrule
+		$1$ & hadoop namenode -format                             & format hdfs                         \\
+		$2$ & \$HADOOP\_HOME/sbin/start-dfs.sh                    & Khởi động hdfs: http://master:50070 \\
+		$3$ & \$HADOOP\_HOME/sbin/start-yarn.sh                   & Khởi động yarn: http://master:8088  \\
+		$4$ & \$HADOOP\_HOME/sbin/stop-dfs.sh                     & Dừng hdfs                           \\ 
+		$5$                     & \$HADOOP\_HOME/sbin/start-yarn.sh                   & Dừng yarn                           \\
+		$6$                     & \$HADOOP\_HOME/sbin/start-all.sh                    & Khởi động hdfs + yarn               \\
+		$7$                     & \$HADOOP\_HOME/sbin/stop-all.sh                     & Dừng hdfs + yarn                    \\
+		$8$                     & \$HADOOP\_HOME/sbin/hadoop-daemon.sh start datanode & Khởi động trên máy worker           \\
+		$9$                     & hadoop fs -mkdir -p /Documents/Data                 & Tạo floder Data trên HDFS           \\
+		$10$                    & hadoop fs -rm /Documents/Data/datatest.txt          & Xóa file Data trên HDFS             \\
+		$11$                    & hadoop fs -rmdir /user/output                       & Xóa floder Data trên HDFS           \\
+		$12$                    & hadoop fs -ls /user/output                          & Liệt kê file trên HDFS              \\
+		$13$                    & hadoop fs -cat /user/output/NTMerged.txt     & Hiển thị nội dung file              \\
+		$14$                    & hadoop fs -cat data.txt /Document/Data/             & Đẩy file local lên HDFS            
+	\end{tabular}
+\end{table}
+\subsection{Danh sách tập lệnh làm việc trên Spark}
+\begin{table}[H]
+	\centering
+	\caption{Danh sách tập lệnh cơ bản làm việc trên Spark}
+	\label{my-spark}
+	\begin{tabular}{@{}cll@{}}
+		\toprule
+		\multicolumn{1}{l}{STT} & Lệnh                            & Ý nghĩa                                    \\ \midrule
+		$1$                     & \$SPARK\_HOME/sbin/start-all.sh & Khởi động Spark                            \\
+		$2$                     & \$SPARK\_HOME/sbin/stop-all.sh  & Dừng Spark                                 \\
+		$3$                     & \$SPARK\_HOME/bin/spark-shell   & Lập trình ứng dụng sử dụng ngôn ngữ scala  \\
+		$4$                     & \$SPARK\_HOME/bin/pyspark       & Lập trình ứng dụng sử dụng ngôn ngữ python \\
+		$5$ & \$SPARK\_HOME/bin/sparkR        & Lập trình ứng dụng sử dụng ngôn ngữ R      \\
+		$6$ & \$SPARK\_HOME/bin/spark-submit  & Tạo ứng dụng                               \\ \bottomrule
+	\end{tabular}
+\end{table}
+% ------------------------------------------------------------------------
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "../thesis"
+%%% End: 

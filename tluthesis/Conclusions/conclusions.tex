@@ -1,0 +1,21 @@
+\def\baselinestretch{1}
+\chapter{Kết luận và hướng phát triển}
+\ifpdf
+    \graphicspath{{Conclusions/ConclusionsFigs/PNG/}{Conclusions/ConclusionsFigs/PDF/}{Conclusions/ConclusionsFigs/}}
+\else
+    \graphicspath{{Conclusions/ConclusionsFigs/EPS/}{Conclusions/ConclusionsFigs/}}
+\fi
+
+\def\baselinestretch{1.66}
+
+\section{Kết luận}
+Khóa luận này tập trung làm rõ bài toán phát hiện cộng đồng, đặc biệt với những cộng đồng có tính chồng chéo, lồng nhau. Đồng thời nhấn mạnh mức độ quan trọng của bài toán trong thực tế hiện nay, khi mà các mạng ngày càng trở lên mở rộng cả về cấu trúc lẫn nội dung có thể thấy một ví dụ điểm hình mạng xã hội Facebook với dân số gần $2$ tỷ người được ví như là một quốc gia ảo. 
+
+Nội dung chính của khóa luận là làm rõ mô hình BigCLAM, từ đó đề xuất sử dụng một vài phương pháp tối ưu hàm lồi trong phần \ref{muc:toiuuhamloi} cũng như phương pháp khởi tạo matrix trọng số giúp cho quá trình phát hiện hiệu quả và nhanh hơn.
+
+Đặc biệt, phần chính của khóa luận này hướng đến là cài đặc thực nghiệm phương pháp phát hiện cộng đồng trên cụm máy tính sử dụng hai framework Apache Hadoop trong việc lưu trữ phân tán và Apache Spark trong quá trình tính toán phân tán. Việc chuyển từ bài toán chạy trên một máy sang bài toán phân tán ra nhiều máy là một bài toán không hề dễ dàng nhưng hiệu quả của nó mang lại rất lớn khi mà dữ liệu ngày một lớn và không ngừng tăng trưởng. Lợi thế của hệ thống phân tán là có thể mở rộng tính toán theo chiều ngang vậy nên tôi đã đề xuất phương pháp giảm gradient ngẫu nhiên theo cụm (MBSGD) được trình bày trong thuật toán \ref{alg:MBSGD}. Tuy nhiên, trong quá trình thực nghiệm những dữ liệu lớn hơn khoảng vài triệu đỉnh và cặp cạnh lại cho thấy thời gian khá chậm với nhu cầu thực tế. Điều này cần phải được nghiên cứu kỹ hơn cả về kiến trúc hạ tầng lẫn tối ưu quá trình lập trình phân tán.
+
+Kết luận, khóa luận về cơ bản đã hoàn thành mục tiêu đã đề ra từ đầu trong việc giải quyết bài toán phát hiện cộng đồng trọng mạng tương tác có kích thước lớn. Tuy nhiên, để áp dụng thuật toán vào thực tế cần phải được đầu tư nghiêm túc để phát huy sức mạnh của thuật toán và hệ tính toán phân tán.
+
+\section{Hướng phát triển}
+Từ những kết luận trên, trong thời gian tới, tôi sẽ tiếp tục nghiên cứu cải tiến tốc độ bài toán phù hợp với nhu cầu phân tích thời gian thực trên các mạng hiện nay. Đồng thời đưa phương pháp này vào các ứng dụng thực tế. Cụ thể là bài toán xây dựng hệ khuyến nghị trong mạng xã hội giáo dục Đại học Thăng Long.

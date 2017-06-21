@@ -1,0 +1,22 @@
+ 
+\begin{abstracts}         
+%Trong thời đại ngày nay, sử dụng tri thức đã trở thành động lực chủ chốt cho tăng trưởng kinh tế quốc gia, cho tăng cường năng lực cạnh tranh của các doanh nghiệp. Đồng thời, dung lượng dữ liệu số tăng rất nhanh chóng, đặc biệt loại dữ liệu do người sử dụng tạo ra chiếm tỷ trọng ngày càng cao, đã trở thành nguồn tại nguyên tiềm ẩn thông tin và tri thức có tiếm năng lớn hưu ích cho phát triển kinh tế và tăng cường cạnh tranh. Nghiên cứu và triển khai các phương pháp tự động phát hiện các mẫu mới, có giá trị, hữu ích tiềm năng và hiểu được trong khối dữ liệu đồ sộ, khăc phục hiện tượng giàu về dữ liệu mà nghèo về thông tin, hướng tới mục tiêu tăng cường tài nguyên tri thức là hết sức cần thiết và có ý nghĩa. Khai phá dữ liệu, thành phần quan trọng của công nghệ tri thức đang phát triển rất mạnh mẽ.
+
+%Khai phá dữ liệu là một trong những lĩnh vực nghiên cứu của khoa học máy tính hiện nay đang được phát triển rất mạnh mẽ. Nó kết hợp giữa máy học, công nghệ cơ sở dữ liệu và một số các Chuyên ngành khác để tìm ra tri thức, bao gồm cả các thông tin dự báo, dự đoán từ những cơ sở dữ liệu lớn.
+
+%Trong khi đó, các ứng dụng của mạng noron truyền thằng được xây dựng dựa trên các nhân tố ảnh hưởng đến sự thay đổi của dữ liệu đã được thực tiễn chứng minh là khá mạnh và hiệu quả trong các bài toán dự đoán và phân tích dữ liệu. Chúng có thể được huấn luyện và ánh xạ từ các dữ liệu vào tới các dữ liệu ra mà không yêu cầu các dữ liệu phải đầy đủ. Trong số các loại mạng tương đối phổ biển thì các mạng truyền thằng nhiều lớp, được huấn luyện bằng thuật toán lan truyền ngược được sử dụng khá nhiều. Các mạng được noron này có khả năng biểu diễn các ánh xạ phi tuyến giữa đầu ra và đầu vào. Các loại mạng này được ứng dụng chủ yếu vào mảng phân tích, dự báo, phân loại. 
+
+Báo cáo này được đề ra với mục đích tìm hiểu và ứng dụng được mạng noron truyền thẳng nhiều lớp và thuật toán lan truyền ngược để giải quyết bài toán tự động gán điểm chất lượng cho khách sạn thông qua nội dung nhận xét của khách hàng.
+
+Nội dung chính của báo cáo được tổ chức thành 3 chương có nội dung được mô tả như dưới đây.
+
+\textbf{Chương I. Các khái niệm cơ bản về mạng noron nhân tạo.} Chương này trình bày những lý thuyết, khái niệm cơ bản về mạng noron nhân tạo.
+
+\textbf{Chương II. Mạng noron truyền thằng nhiều lớp và thuật toán lan truyền ngược.} Chương này cung cấp một cái nhìn tổng quan nhất và những vấn đề về quá trình huấn luyện mạng, thuật toán học của mạng và tập trung chủ yếu vào thuật toán lan truyền ngược.
+
+\textbf{Chương III. Ứng dụng mạng noron nhân tạo vào việc tự động gán điểm chất lượng cho khách sạn.} Chương này giới thiệu sơ lượng về bộ dữ liệu sử dụng, các phương pháp đánh giá kết quả dự đoán.
+
+\textbf{Kết luận.} Tổng kết những kết quả đạt được của thực tập và hướng phát triển nghiên cứu tiếp theo.  
+
+\end{abstracts}
+ 
