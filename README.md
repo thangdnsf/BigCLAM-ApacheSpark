@@ -5,3 +5,10 @@ In this thesis, I provide a general view of communities and its the real life ap
 
 ![Figure 1-1](img.png)
 
+Contact:thangdn.tlu@outlook.com
+
+Every comment would be appreciated.
+
+If you want to use parts of any code of mine:
+
+let me know and use it!
