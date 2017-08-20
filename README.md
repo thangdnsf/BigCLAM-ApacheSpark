@@ -7,6 +7,8 @@ In this thesis, I provide a general view of communities and its the real life ap
 
 ![Figure 1-1](img.png)
 
+![Figure 1-2](BigClamK_1sp.png)
+
 Contact:thangdn.tlu@outlook.com
 
 Every comment would be appreciated.
